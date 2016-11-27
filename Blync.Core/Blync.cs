@@ -8,5 +8,8 @@ namespace BlyncPresence.Core
 {
     public class Blync
     {
+		public Blync()
+		{
+		}
     }
 }
