@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlyncServer", "BlyncServer\BlyncServer.csproj", "{56C80E52-64E7-4BA1-AA73-9CE3AB39CFBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blync", "Blync\Blync.csproj", "{E0089FFE-10EB-4662-9F97-5D5156F854F8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlyncPresenceNotifier", "BlyncPresenceNotifier\BlyncPresenceNotifier.csproj", "{E0089FFE-10EB-4662-9F97-5D5156F854F8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blync.Tests", "Blync.Tests\Blync.Tests.csproj", "{C257DFCC-97D0-43E0-8D30-26B162067537}"
 EndProject
