@@ -33,6 +33,8 @@ namespace Blync
 		class LightImpl : IColoredLight
 		{
 			Color color;
+            bool isOn;
+            bool isDimmed;
 			int deviceIndex;
 			BlynclightController controller;
 
@@ -50,11 +52,48 @@ namespace Blync
 				controller.InitBlyncDevices();
 			}
 
-			public void TurnOn() => TurnOn(color);
+            public bool IsDimmed
+            {
+                get => isDimmed;
+                set 
+                {
+                    if (value)
+                        isDimmed = controller.SetLightDim(deviceIndex);
+                    else
+                        isDimmed = controller.ClearLightDim(deviceIndex);
+                }
+            }
 
-			public void TurnOn(Color color) => controller.TurnOnRGBLights(deviceIndex, color.R, color.G, color.B);
+            public bool IsOn => isOn;
 
-			public void TurnOff() => controller.ResetLight(deviceIndex);
+            public void Flash(byte speed)
+            {
+                TurnOn(color);
+                controller.SelectLightFlashSpeed(deviceIndex, speed);
+                controller.StartLightFlash(deviceIndex);
+            }
+
+            public void Flash(byte speed, Color color)
+            {
+                TurnOn(color);
+                Flash(speed);
+            }
+
+            public void TurnOn() => TurnOn(color);
+
+            public void TurnOn(Color color)
+            {
+                this.color = color;
+                controller.StopLightFlash(deviceIndex);
+                isOn = controller.TurnOnRGBLights(deviceIndex, color.R, color.G, color.B);
+            }
+
+            public void TurnOff()
+            {
+                controller.ResetLight(deviceIndex);
+                controller.StopLightFlash(deviceIndex);
+                isOn = false;
+            }
 		}
 	}
 }

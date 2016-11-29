@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Blynclight;
+using System;
 using System.Drawing;
 using System.Linq;
 using System.Net.Mqtt;
@@ -22,9 +23,28 @@ namespace Blync.Tests
 			this.output = output;
 		}
 
-		//public BlyncTests() { }
+        [Fact]
+        public void when_dimming_then_dims()
+        {
+            var controller = new BlynclightController();
+            controller.InitBlyncDevices();
 
-		[Fact]
+            controller.Display(BlynclightController.Color.Blue);
+            controller.TurnOnBlueLight(0);
+            controller.SetLightDim(0);
+            Thread.Sleep(1000);
+            controller.SetLightDim(0);
+            Thread.Sleep(1000);
+            controller.SetLightDim(0);
+            Thread.Sleep(1000);
+            controller.ClearLightDim(0);
+            Thread.Sleep(1000);
+            controller.ResetLight(0);
+        }
+
+        //public BlyncTests() { }
+
+        [Fact]
 		public async Task when_connecting_then_succeeds()
 		{
 			var client = await MqttClient.CreateAsync("localhost", new MqttConfiguration());

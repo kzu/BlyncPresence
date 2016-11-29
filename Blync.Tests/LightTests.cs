@@ -27,11 +27,54 @@ namespace Blync.Tests
 			var light = Light.Create(Color.Blue);
 
 			light.TurnOn();
+            Assert.True(light.IsOn);
 			Thread.Sleep(200);
 			light.TurnOff();
-		}
+            Assert.False(light.IsOn);
+        }
 
-		[InlineData(KnownColor.Red)]
+        [Fact]
+        public void it_can_flash()
+        {
+            var light = Light.Create(Color.Blue);
+
+            light.Flash(100);
+            Assert.True(light.IsOn);
+            Thread.Sleep(1000);
+            light.TurnOff();
+            Assert.False(light.IsOn);
+        }
+
+        [Fact]
+        public void when_turning_off_then_flashing_stops()
+        {
+            var light = Light.Create(Color.Blue);
+
+            light.Flash(10);
+            Assert.True(light.IsOn);
+            Thread.Sleep(2000);
+            light.TurnOff();
+            Assert.False(light.IsOn);
+            light.TurnOn();
+            Thread.Sleep(2000);
+            light.TurnOff();
+        }
+
+        [Fact]
+        public void it_can_be_dimmed()
+        {
+            var light = Light.Create(Color.Blue);
+
+            light.TurnOn();
+            Assert.False(light.IsDimmed);
+            Thread.Sleep(500);
+            light.IsDimmed = true;
+            Assert.True(light.IsDimmed);
+            Thread.Sleep(500);
+            light.TurnOff();
+        }
+
+        [InlineData(KnownColor.Red)]
 		[InlineData(KnownColor.DeepPink)]
 		[InlineData(KnownColor.BlueViolet)]
 		[InlineData(KnownColor.SpringGreen)]

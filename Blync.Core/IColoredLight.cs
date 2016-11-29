@@ -4,6 +4,8 @@ namespace Blync
 {
 	public interface IColoredLight : ILight
 	{
-		void TurnOn(Color color);
+        void Flash(byte speed, Color color);
+
+        void TurnOn(Color color);
 	}
 }
