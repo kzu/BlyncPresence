@@ -50,7 +50,23 @@ namespace Blync
 
 				controller = new BlynclightController();
 				controller.InitBlyncDevices();
+                controller.ResetLight(deviceIndex);
 			}
+
+            public Color Color
+            {
+                get => color;
+                set
+                {
+                    if (value != color)
+                    {
+                        color = value;
+                        // If light isn't already on, don't turn it on.
+                        if (IsOn)
+                            controller.TurnOnRGBLights(deviceIndex, color.R, color.G, color.B);
+                    }
+                }
+            }
 
             public bool IsDimmed
             {

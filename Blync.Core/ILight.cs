@@ -2,16 +2,16 @@
 
 namespace Blync
 {
-	public interface ILight
-	{
+    public interface ILight
+    {
         bool IsDimmed { get; set; }
 
         bool IsOn { get; }
 
         void Flash(byte speed);
 
-		void TurnOn();
+        void TurnOn();
 
-		void TurnOff();
-	}
+        void TurnOff();
+    }
 }

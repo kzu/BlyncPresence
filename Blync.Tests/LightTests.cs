@@ -46,6 +46,47 @@ namespace Blync.Tests
         }
 
         [Fact]
+        public void when_flashing_and_changing_color_it_continues_flashing()
+        {
+            var light = Light.Create();
+
+            light.Flash(100, Color.Red);
+            Assert.True(light.IsOn);
+            Thread.Sleep(1000);
+            light.Color = Color.Blue;
+            Thread.Sleep(1000);
+            light.TurnOff();
+            Assert.False(light.IsOn);
+            Assert.Equal(Color.Blue, light.Color);
+        }
+
+        [Fact]
+        public void when_turned_on_and_changing_color_then_changes_color()
+        {
+            var light = Light.Create();
+
+            light.TurnOn(Color.Red);
+            Assert.True(light.IsOn);
+            Thread.Sleep(1000);
+            light.Color = Color.Blue;
+            Thread.Sleep(1000);
+            light.TurnOff();
+            Assert.False(light.IsOn);
+            Assert.Equal(Color.Blue, light.Color);
+        }
+
+        [Fact]
+        public void when_turned_off_and_changing_color_then_remains_off()
+        {
+            var light = Light.Create();
+
+            Assert.False(light.IsOn);
+            light.Color = Color.Blue;
+            Assert.False(light.IsOn);
+        }
+
+
+        [Fact]
         public void when_turning_off_then_flashing_stops()
         {
             var light = Light.Create(Color.Blue);
